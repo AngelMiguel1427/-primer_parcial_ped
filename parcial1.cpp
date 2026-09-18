@@ -65,7 +65,6 @@ PuntoTrayectoria* obtenerPuntoMasAlejado( PuntoTrayectoria puntos[], int cantida
     return puntoCritico;
 
 }
-
 void mostrarPunto(const PuntoTrayectoria& p){
     cout << "ID: " << p.Id << endl;
     cout << "Nombre: " << p.Nombre << endl;
@@ -73,8 +72,6 @@ void mostrarPunto(const PuntoTrayectoria& p){
     cout << "Distancia al origen: " << p.DistanciaOrigen << endl;
     cout << "Clasificacion: " << p.Clasificacion << endl;
 }
-  
-
 void corregirCoordenadas(PuntoTrayectoria &punto,float desplazamientoX,float desplazamientoY,float desplazamientoZ){
     cout << "Ingrese el desplazamiento en X: ";
     cin >> desplazamientoX;
@@ -86,40 +83,51 @@ void corregirCoordenadas(PuntoTrayectoria &punto,float desplazamientoX,float des
     punto.Coordenadas[1] += desplazamientoY;
     punto.Coordenadas[2] += desplazamientoZ;
 }
+void generarReporte(PuntoTrayectoria puntos[], int cantidadPuntos) {
+    int cercanos = 0, intermedios = 0, lejanos = 0, extremos = 0;
+    float sumaDistancias = 0.0;
+
+    for (int i = 0; i < cantidadPuntos; i++) {
+        calcularDistancia(puntos[i]);
+        clasificarPunto(puntos[i]);
+        sumaDistancias += puntos[i].DistanciaOrigen;
+
+        if (puntos[i].Clasificacion == "CERCANO") {
+            cercanos++;
+        } else if (puntos[i].Clasificacion == "INTERMEDIO") {
+            intermedios++;
+        } else if (puntos[i].Clasificacion == "LEJANO") {
+            lejanos++;
+        } else if (puntos[i].Clasificacion == "EXTREMO") {
+            extremos++;
+        }
+    }
+
+    float distanciaPromedio = sumaDistancias / cantidadPuntos;
+
+    cout << "Cantidad de puntos CERCANOS: " << cercanos << endl;
+    cout << "Cantidad de puntos INTERMEDIOS: " << intermedios << endl;
+    cout << "Cantidad de puntos LEJANOS: " << lejanos << endl;
+    cout << "Cantidad de puntos EXTREMOS: " << extremos << endl;
+    cout << "Distancia promedio: " << distanciaPromedio << endl;
+}
 
 int main (){
-    int opcion;
-    cout << "Bienvenido al programa de registro de puntos en el espacio" << endl;
-    cout <<"¿Que accion desea realizar?" << endl;
-    cin >> opcion;
-    switch (opcion) {
-        case 1:
-            cout << "Registrar un punto" << endl;
-            break;
-        case 2:
-            cout << "Obtener el punto mas alejado" << endl;
-            break;
-        case 3:
-            cout << "Corregir las coordenadas de un punto" << endl;
-            break;
-        default:
-            cout << "Opcion invalida" << endl;
-            return 0;
-            
-    }while(=!0);
-
     PuntoTrayectoria punto;
     registrarPunto(punto);
-    float distanciaOrigen = calcularDistancia(punto);
+    calcularDistancia(punto);
     clasificarPunto(punto);
-    cout << "La distancia del punto respecto al origen es: " << distanciaOrigen << endl;
-    cout << "La clasificacion del punto es: " << punto.Clasificacion << endl;
     
-   mostrarPunto(punto);
-   corregirCoordenadas(punto,0,0,0);
-   cout << "la informacion del punto despues de la correcion es: " << endl;
     mostrarPunto(punto);
+    corregirCoordenadas(punto,0,0,0);
+    cout << "la informacion del punto despues de la correcion es: " << endl;
+     mostrarPunto(punto);
     return 0;
+
+    
+
+
+
 
   
     
