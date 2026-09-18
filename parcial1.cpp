@@ -66,7 +66,48 @@ PuntoTrayectoria* obtenerPuntoMasAlejado( PuntoTrayectoria puntos[], int cantida
 
 }
 
+void mostrarPunto(const PuntoTrayectoria& p){
+    cout << "ID: " << p.Id << endl;
+    cout << "Nombre: " << p.Nombre << endl;
+    cout << "Coordenadas: (" << p.Coordenadas[0] << ", " << p.Coordenadas[1] << ", " << p.Coordenadas[2] << ")" << endl;
+    cout << "Distancia al origen: " << p.DistanciaOrigen << endl;
+    cout << "Clasificacion: " << p.Clasificacion << endl;
+}
+  
+
+void corregirCoordenadas(PuntoTrayectoria &punto,float desplazamientoX,float desplazamientoY,float desplazamientoZ){
+    cout << "Ingrese el desplazamiento en X: ";
+    cin >> desplazamientoX;
+    cout << "Ingrese el desplazamiento en Y: ";
+    cin >> desplazamientoY;
+    cout << "Ingrese el desplazamiento en Z: ";
+    cin >> desplazamientoZ;
+    punto.Coordenadas[0] += desplazamientoX;
+    punto.Coordenadas[1] += desplazamientoY;
+    punto.Coordenadas[2] += desplazamientoZ;
+}
+
 int main (){
+    int opcion;
+    cout << "Bienvenido al programa de registro de puntos en el espacio" << endl;
+    cout <<"¿Que accion desea realizar?" << endl;
+    cin >> opcion;
+    switch (opcion) {
+        case 1:
+            cout << "Registrar un punto" << endl;
+            break;
+        case 2:
+            cout << "Obtener el punto mas alejado" << endl;
+            break;
+        case 3:
+            cout << "Corregir las coordenadas de un punto" << endl;
+            break;
+        default:
+            cout << "Opcion invalida" << endl;
+            return 0;
+            
+    }while(=!0);
+
     PuntoTrayectoria punto;
     registrarPunto(punto);
     float distanciaOrigen = calcularDistancia(punto);
@@ -74,13 +115,13 @@ int main (){
     cout << "La distancia del punto respecto al origen es: " << distanciaOrigen << endl;
     cout << "La clasificacion del punto es: " << punto.Clasificacion << endl;
     
-    PuntoTrayectoria* puntoMasAlejado = obtenerPuntoMasAlejado(&punto, 1);//se pasa la direccion de memoria del punto y la cantidad de puntos es 1
-    if (puntoMasAlejado) {
-        cout << "El punto mas alejado es: " << puntoMasAlejado->Nombre << endl;
-        cout << "ID: " << puntoMasAlejado->Id << endl;
-        cout << "Coordenadas: (" << puntoMasAlejado->Coordenadas[0] << ", " << puntoMasAlejado->Coordenadas[1] << ", " << puntoMasAlejado->Coordenadas[2] << ")" << endl;
-        cout << "Distancia al origen: " << puntoMasAlejado->DistanciaOrigen << endl;
-        cout << "Clasificacion: " << puntoMasAlejado->Clasificacion << endl;
-    }
+   mostrarPunto(punto);
+   corregirCoordenadas(punto,0,0,0);
+   cout << "la informacion del punto despues de la correcion es: " << endl;
+    mostrarPunto(punto);
+    return 0;
+
+  
+    
 
 }
