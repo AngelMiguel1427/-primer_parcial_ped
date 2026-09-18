@@ -103,13 +103,7 @@ void generarReporte(PuntoTrayectoria puntos[], int cantidadPuntos) {
         }
     }
 
-    float distanciaPromedio = sumaDistancias / cantidadPuntos;
 
-    cout << "Cantidad de puntos CERCANOS: " << cercanos << endl;
-    cout << "Cantidad de puntos INTERMEDIOS: " << intermedios << endl;
-    cout << "Cantidad de puntos LEJANOS: " << lejanos << endl;
-    cout << "Cantidad de puntos EXTREMOS: " << extremos << endl;
-    cout << "Distancia promedio: " << distanciaPromedio << endl;
 }
 
 int main (){
