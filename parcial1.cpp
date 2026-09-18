@@ -33,12 +33,25 @@ float calcularDistancia(PuntoTrayectoria &punto){
     return distanciaOrigen;
 }
 
+void clasificarPunto(PuntoTrayectoria &punto){
+    if (punto.DistanciaOrigen <= 5) {
+        punto.Clasificacion = "CERCANO";
+    } else if (punto.DistanciaOrigen > 5 && punto.DistanciaOrigen <= 10) {
+        punto.Clasificacion = "INTERMEDIO";
+    } else if (punto.DistanciaOrigen > 10 && punto.DistanciaOrigen <= 20) {
+        punto.Clasificacion = "LEJANO";
+    } else {
+        punto.Clasificacion = "EXTREMO";
+    }
+}
 
 int main (){
     PuntoTrayectoria punto;
     registrarPunto(punto);
     float distanciaOrigen = calcularDistancia(punto);
+    clasificarPunto(punto);
     cout << "La distancia del punto respecto al origen es: " << distanciaOrigen << endl;
+    cout << "La clasificacion del punto es: " << punto.Clasificacion << endl;
 
 
 
